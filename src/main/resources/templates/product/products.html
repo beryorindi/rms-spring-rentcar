@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+      <title>Spring Boot MVC Security using Thymeleaf</title>
+      <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+   <h3>Products List</h3>
+   <!-- <div th:if="${}">
+	    Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
+	    <form th:action="@{/logout}" method="POST">
+	         <input type="submit" value="Logout"/>
+	    </form>
+   </div> --> 
+   <br/>
+   <a th:href="${'/product/add'}"><button>Add</button></a>	 
+   <table>
+	<tr th:each="product: ${products}">
+	    <td th:text="${product.id}">Id</td>
+	    <td th:text="${product.brand}">Brand</td>
+	    <td th:text="${product.model}">Model</td>
+	    <td th:text="${product.type}">Type</td>
+	    <td>
+	    	<a th:href="${'/products/edit/' + product.id}"><button>Edit</button></a>
+	    	<a th:href="${'/products/delete/' + product.id}"><button>Delete</button></a>
+	    </td>
+	</tr>
+   </table>
+</body>
+</html> 

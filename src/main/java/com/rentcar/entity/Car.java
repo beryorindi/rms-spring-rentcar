@@ -1,14 +1,15 @@
 package com.rentcar.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="car_id")
 	private Long id;
 	@Column(name="brand")
 	@NotEmpty(message = "*Please input brand")
@@ -34,7 +36,10 @@ public class Car {
 	private int seat;
 	@Column(name="year")
 	private int year;
-
+	@OneToOne(fetch =FetchType.LAZY)
+	@JoinColumn(name="product_id")
+	private Product product;
+	
 	public Car(){}
 	
 	public Car(String transmition, String type, String brand, int year, String model, int seat) {
@@ -90,6 +95,18 @@ public class Car {
 	
 	public boolean isNew() {
 		return (this.id == null);
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }
