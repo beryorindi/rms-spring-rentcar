@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +43,7 @@ public class CarController {
 		modelAndView.setViewName("car/cars");
 		return modelAndView;
 	}
-	@GetMapping({"cars/add","cars/add"})
+	@GetMapping("cars/add")
 	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
 	public ModelAndView addCarPage(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -51,7 +52,7 @@ public class CarController {
 		modelAndView.setViewName("car/add");
 		return modelAndView;
 	}
-	@PostMapping({"/cars/add","cars/add"})
+	@PostMapping("/cars/add")
 /*	@PostMapping({"/admin/cars/add","/super_admin/cars/add"})*/
 	public ModelAndView addCar(@Valid Car car, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
@@ -67,6 +68,45 @@ public class CarController {
 		}
 		return modelAndView;
 	}
+	
+	@GetMapping("cars/edit/{id}")
+	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	public ModelAndView updateCarPage(@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView();
+		Car car = carService.getCarById(id);
+		modelAndView.addObject("car", car);
+		modelAndView.setViewName("car/edit");
+		return modelAndView;
+	}
+	
+	@PostMapping("cars/edit")
+	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	public ModelAndView updateCar(@Valid Car car, BindingResult bindingResult){
+		ModelAndView modelAndView = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("cars/edit");
+		} else {
+		carService.updateCar(car);
+		//modelAndView.addObject("successMessage", "Car has been added successfully");
+		List<Car> cars = carService.getAllCars();
+		modelAndView.addObject("cars", cars);
+		modelAndView.setViewName("redirect:/cars");
+		}
+		return modelAndView;
+	}
+	
+	@GetMapping("cars/delete/{id}")
+	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	public ModelAndView deleteCar(@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView();
+		carService.deleteCar(id);
+		//modelAndView.addObject("successMessage", "Car has been added successfully");
+		List<Car> cars = carService.getAllCars();
+		modelAndView.addObject("cars", cars);
+		modelAndView.setViewName("redirect:/cars");
+		return modelAndView;
+	}
+	
 	
 	/*@PostMapping("article")
 	public ResponseEntity<Void> addArticle(@RequestBody Article article, UriComponentsBuilder builder) {

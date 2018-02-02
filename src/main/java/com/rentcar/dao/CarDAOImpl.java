@@ -1,5 +1,6 @@
 package com.rentcar.dao;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import com.rentcar.entity.Car;
 @Repository
 public class CarDAOImpl implements CarDAO{
 	
+
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -36,14 +38,25 @@ public class CarDAOImpl implements CarDAO{
 
 	@Override
 	public void updateCar(Car car) {
+/*		String hql = "UPDATE car SET brand=?, model=?, type=?, transmition=?, year=?, seat=? WHERE id=?";
+		em.createQuery(hql)
+						.setParameter(1, car.getBrand())
+						.setParameter(2, car.getModel())
+						.setParameter(3, car.getType())
+						.setParameter(4, car.getTransmition())
+						.setParameter(5, car.getYear())
+						.setParameter(6, car.getSeat())
+						.setParameter(7, car.getId());
+		em.
 		Car obj = getCarById(car.getId());
 		obj.setBrand(car.getBrand());
 		obj.setModel(car.getModel());
 		obj.setSeat(car.getSeat());
 		obj.setTransmition(car.getTransmition());
 		obj.setType(car.getType());
-		obj.setYear(car.getYear());
-		em.flush();
+		obj.setYear(car.getYear());*/
+//		em.flush();
+		em.merge(car);
 	}
 
 	@Override

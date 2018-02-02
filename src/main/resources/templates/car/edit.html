@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit Car</title>
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form action="/cars/edit" 
+					th:object="${car}" method="Post" class="form-horizontal"
+					role="form">
+					<h2>Edit Car</h2>
+					<div class="form-group">
+						<div class="col-sm-9">
+						<input type="text" th:field="*{id}" placeholder="id"
+								class="form-control" /> 
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+						<label th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"
+								class="validation-message"></label>
+						<input type="text" th:field="*{brand}" placeholder="Brand"
+								class="form-control" /> 
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+						<label	th:if="${#fields.hasErrors('model')}" th:errors="*{model}"
+								class="validation-message"></label>
+							<input type="text" th:field="*{model}"
+								placeholder="Model" class="form-control" /> 
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{type}" placeholder="Type"
+								class="form-control" /> <label
+								th:if="${#fields.hasErrors('type')}" th:errors="*{type}"
+								class="validation-message"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<select th:field="*{transmition}" 
+								class="form-control" >
+								<option value="AT">Automatic</option>
+								<option value="MT">Manual</option> 
+							</select>
+							<label
+								th:if="${#fields.hasErrors('transmition')}" th:errors="*{transmition}"
+								class="validation-message"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{seat}" placeholder="Seat"
+								class="form-control" /> <!-- <label
+								th:if="${#fields.hasErrors('seat')}" th:errors="*{seat}"
+								class="validation-message"></label> -->
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{year}" placeholder="Year"
+								class="form-control" /> <!-- <label
+								th:if="${#fields.hasErrors('year')}" th:errors="*{year}"
+								class="validation-message"></label> -->
+						</div>
+					</div>
+					
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Save</button>
+						</div>
+					</div>
+					
+					<span th:utext="${successMessage}"></span>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

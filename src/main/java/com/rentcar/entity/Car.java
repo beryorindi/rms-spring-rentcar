@@ -88,4 +88,8 @@ public class Car {
 		return id;
 	}
 	
+	public boolean isNew() {
+		return (this.id == null);
+	}
+	
 }
