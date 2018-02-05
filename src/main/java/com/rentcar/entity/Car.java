@@ -1,13 +1,13 @@
 package com.rentcar.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,8 +36,7 @@ public class Car {
 	private int seat;
 	@Column(name="year")
 	private int year;
-	@OneToOne(fetch =FetchType.LAZY)
-	@JoinColumn(name="product_id")
+	@OneToOne(cascade= CascadeType.ALL, mappedBy = "car", fetch =FetchType.LAZY)
 	private Product product;
 	
 	public Car(){}

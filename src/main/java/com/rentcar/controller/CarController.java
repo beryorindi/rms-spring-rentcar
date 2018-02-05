@@ -52,7 +52,7 @@ public class CarController {
 		modelAndView.setViewName("car/add");
 		return modelAndView;
 	}
-	@PostMapping("/cars/add")
+	@PostMapping("cars/add")
 /*	@PostMapping({"/admin/cars/add","/super_admin/cars/add"})*/
 	public ModelAndView addCar(@Valid Car car, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();

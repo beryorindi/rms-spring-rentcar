@@ -14,13 +14,13 @@
 	    </form>
    </div> --> 
    <br/>
-   <a th:href="${'/product/add'}"><button>Add</button></a>	 
+   <a th:href="${'/products/add'}"><button>Add</button></a>	 
    <table>
 	<tr th:each="product: ${products}">
 	    <td th:text="${product.id}">Id</td>
-	    <td th:text="${product.brand}">Brand</td>
-	    <td th:text="${product.model}">Model</td>
-	    <td th:text="${product.type}">Type</td>
+	    <td th:text="${product.stock}">Stock</td>
+	    <td th:text="${product.price}">Price</td>
+	    <td th:text="${product.car.brand}+' '+${product.car.model}">Car Id</td>
 	    <td>
 	    	<a th:href="${'/products/edit/' + product.id}"><button>Edit</button></a>
 	    	<a th:href="${'/products/delete/' + product.id}"><button>Delete</button></a>

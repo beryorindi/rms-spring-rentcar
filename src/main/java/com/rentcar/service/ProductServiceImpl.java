@@ -28,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void addProduct(Product p) {
 		// TODO Auto-generated method stub
+		p.setAvailable(p.getStock());
 		productDAO.addProduct(p);
 	}
 
