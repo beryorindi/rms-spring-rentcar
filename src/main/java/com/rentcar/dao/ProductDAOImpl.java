@@ -45,4 +45,12 @@ public class ProductDAOImpl implements ProductDAO{
 		em.remove(getProductById(id));
 	}
 
+	@Override
+	public boolean productExists(Car car) {
+		String hql = "FROM Product as p WHERE p.car.id = ?";
+		int count = em.createQuery(hql)
+						.setParameter(1, car.getId()).getResultList().size();
+		return count > 0 ? true : false;
+	}
+
 }

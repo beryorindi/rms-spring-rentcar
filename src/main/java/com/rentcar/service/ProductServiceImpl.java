@@ -34,7 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void updateProduct(Product p) {
-		productDAO.updateProduct(p);
+		if(!productDAO.productExists(p.getCar())){
+			productDAO.updateProduct(p);
+		}
 	}
 
 	@Override

@@ -77,4 +77,34 @@ public class ProductControlller {
 		modelAndView.setViewName("redirect:/products");
 		return modelAndView;
 	}
+	
+	@GetMapping("products/edit/{id}")
+	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	public ModelAndView updateProductPage(@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView();
+		Product product = productService.getProductById(id);
+		List<Car> cars = carService.getAllCars();
+		modelAndView.addObject("product", product);
+		modelAndView.addObject("cars", cars);
+		modelAndView.setViewName("product/edit");
+		return modelAndView;
+	}
+	
+	@PostMapping("products/edit")
+	/*@GetMapping({"/admin/products/add","/super_admin/products/add"})*/
+	public ModelAndView updateProduct(@Valid Product product, BindingResult bindingResult){
+		ModelAndView modelAndView = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("products/edit");
+		} else {
+		Car car = carService.getCarById(product.getCar().getId());
+		product.setCar(car);
+		productService.updateProduct(product);
+		//modelAndView.addObject("successMessage", "product has been added successfully");
+		List<Product> products = productService.getAllProducts();
+		modelAndView.addObject("products", products);
+		modelAndView.setViewName("redirect:/products");
+		}
+		return modelAndView;
+	}
 }
