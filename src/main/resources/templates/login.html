@@ -2,34 +2,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div th:replace="fragments/header :: header-css" />
+
 <title>Login</title>
 </head>
 <body>
-	<form th:action="@{/registration}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-	</form>	
-	
-	<div class="container">
-		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-		<form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br/>
-			 
-			<input type="text" id="email" name="email"  th:placeholder="Email"
-				class="form-control" /> <br/> 
-			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br /> 
-				
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+	<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+		<main class="mdl-layout__content">
+		
+		<div class="mdl-card mdl-shadow--6dp">
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+				<h2 class="mdl-card__title-text">Login</h2>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-		</form>
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email or Password
+					invalid, please verify</p>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<form action="/login" method="POST">
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input" id="email" name="email" /> <label
+							class="mdl-textfield__label" for="email">Email</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input" type="password" id="password"
+							name="password" /> <label class="mdl-textfield__label"
+							for="password">Password</label>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<button
+							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log
+							in</button>
+					</div>
+
+				</form>
+			</div>
+			<div>
+				<a href="/registration"><button
+						class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+						type="Submit">Not have account? Register Here</button></a>
+			</div>
+
+		</div>
+		</main>
+		<div th:replace="fragments/footer :: footer" />
 	</div>
 </body>
 </html>

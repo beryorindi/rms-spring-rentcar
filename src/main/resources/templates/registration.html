@@ -2,18 +2,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+	<div th:replace="fragments/header :: header-css"/>
 	<title>Registration Form</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-	<form th:action="@{/login}" method="get">
+	<!--<form th:action="@{/login}" method="get">
 		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
 	</form>	
 	
-	<div class="container">
+	 <div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form autocomplete="off" action="#" th:action="@{/registration}"
@@ -66,6 +67,55 @@
 				</form>
 			</div>
 		</div>
+	</div> -->
+
+	<div class="mdl-layout mdl-js-layout mdl-color--grey-100 box-center">
+		<main class="mdl-layout__content ">
+			<div class="mdl-card mdl-shadow--6dp">
+				<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+					<h2 class="mdl-card__title-text">Register</h2>
+				</div>
+				<form autocomplete="off" action="#" th:action="@{/registration}"
+					th:object="${user}" method="post" class="form-horizontal"
+					role="form">
+					<div class="mdl-card__supporting-text">
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" th:field="*{name}" />
+							<label class="mdl-textfield__label" for="name">Name</label>
+						</div>
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+							class="validation-message"></p>
+						<div  class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" th:field="*{lastName}"/>
+							<label class="mdl-textfield__label" for="lastName">Last Name</label>
+						</div>
+						<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+							class="validation-message"></p>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" th:field="*{email}" />
+							<label class="mdl-textfield__label" for="email">Email</label>
+						</div>
+						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							class="validation-message"></p>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="password" th:field="*{password}"/>
+							<label class="mdl-textfield__label" for="password">Password</label>
+						</div>
+						<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+							class="validation-message"></p>
+	
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<button type="submit"
+							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Register
+						</button>
+					</div>
+	
+				</form>
+				
+			</div>
+			<div th:replace="fragments/footer :: footer" />
+		</main>
 	</div>
 
 </body>

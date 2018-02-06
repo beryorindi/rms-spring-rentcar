@@ -99,6 +99,7 @@ public class ProductControlller {
 		} else {
 		Car car = carService.getCarById(product.getCar().getId());
 		product.setCar(car);
+		product.setAvailable(product.getStock());
 		productService.updateProduct(product);
 		//modelAndView.addObject("successMessage", "product has been added successfully");
 		List<Product> products = productService.getAllProducts();

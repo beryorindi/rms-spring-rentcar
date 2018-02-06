@@ -30,7 +30,7 @@ public class CarController {
 	}*/
 	
 	
-	@GetMapping("**/cars")
+	@GetMapping("cars")
 	public ModelAndView carsPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Car> cars = carService.getAllCars();
@@ -102,26 +102,5 @@ public class CarController {
 		return modelAndView;
 	}
 	
-	
-	/*@PostMapping("article")
-	public ResponseEntity<Void> addArticle(@RequestBody Article article, UriComponentsBuilder builder) {
-                boolean flag = articleService.addArticle(article);
-                if (flag == false) {
-        	    return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-                }
-                HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(builder.path("/article/{id}").buildAndExpand(article.getArticleId()).toUri());
-                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	}
-	@PutMapping("article")
-	public ResponseEntity<Article> updateArticle(@RequestBody Article article) {
-		articleService.updateArticle(article);
-		return new ResponseEntity<Article>(article, HttpStatus.OK);
-	}
-	@DeleteMapping("article/{id}")
-	public ResponseEntity<Void> deleteArticle(@PathVariable("id") Integer id) {
-		articleService.deleteArticle(id);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}	*/
 	
 }

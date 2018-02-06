@@ -1,0 +1,40 @@
+.mdl-layout {
+	align-items: center;
+  	justify-content: center;
+}
+
+.box-center {
+	align-items: center;
+  	justify-content: center;
+}
+
+.mdl-layout__content {
+	padding: 24px;
+ 	flex: 1 0 auto; 
+/* 	flex: none; */
+}
+
+.mdl-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer{
+/* 	align-items :center; */
+	justify-content: center;
+}  
+
+.validation-message{
+	font-color : red;
+}
+
+.demo-layout-transparent {
+  background-color: #006be5;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
