@@ -1,40 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-      <title>Cars</title>
-      <div th:replace="fragments/header :: header-css"></div>
+	<div th:replace="fragments/header :: header-css"></div>
+	<title>Products</title>
+
 </head>
 <body>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<div th:replace="fragments/header :: header"></div>
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
-			<div class="page-content">
-			<h3>Cars List</h3>			   
+		<div class="page-content">
+			<h3>Product List</h3>			   
 			<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
               <thead>
                 <tr>
                   <th class="mdl-data-table__cell--non-numeric">Id</th>
-                  <th>Brand</th>
-                  <th>Model</th>
-                  <th>Type</th>
-                  <th>Type</th>
+                  <th>Stock</th>
+                  <th>Price</th>
+                  <th>Car</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-					<tr th:each="car: ${cars}">
-						<td class="mdl-data-table__cell--non-numeric" th:text="${car.id}">Id</td>
-						<td th:text="${car.brand}">Brand</td>
-						<td th:text="${car.model}">Model</td>
-						<td th:text="${car.type}">Type</td>
-						<td><a th:href="${'/cars/edit/' + car.id}">
+					<tr th:each="product : ${products}">
+						<td th:text="${product.id}">Id</td>
+					<td th:text="${product.stock}">Stock</td>
+					<td th:text="${product.price}">Price</td>
+					<td th:text="${product.car.brand}+' '+${product.car.model}">Car	Id</td>
+						<td><a th:href="${'/products/edit/' + product.id}">
 								<button
 									class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">edit</i>
 								</button>
 							</a> 
-							<a th:href="${'/cars/delete/' + car.id}">
+							<a th:href="${'/products/delete/' + product.id}">
 								<button	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">delete</i>
 								</button>
@@ -42,7 +44,7 @@
 						</td>
 					</tr>
 					<tr>
-						<a th:href="${'/cars/add'}"	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+						<a th:href="${'/products/add'}"	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 							<button>
 								<i class="material-icons">add</i>
 							</button>
@@ -51,10 +53,12 @@
 				</tbody>              
             </table>
 		</div>
+		
+		
+		
 		</main>
 		<div th:replace="fragments/footer :: footer"></div>
 	</div>
-	
-   
+
 </body>
-</html> 
+</html>

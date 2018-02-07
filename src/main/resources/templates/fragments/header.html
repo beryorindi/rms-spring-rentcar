@@ -22,8 +22,14 @@
 					<div class="mdl-layout-spacer"></div>
 					<!-- Navigation -->
 					<nav class="mdl-navigation">
-						<a sec:authorize="isAuthenticated()" class="mdl-navigation__link"
-							href="/logout">Sign Out</a> <a sec:authorize="!isAuthenticated()"
+							<!-- user role -->
+							<a sec:authorize="hasAuthority('USER')" class="mdl-navigation__link" href="/cart">Cart</a>
+							
+							<!-- All Role  -->
+							<a sec:authorize="isAuthenticated()"  class="mdl-navigation__link" href="/logout">Log Out</a> 							
+						
+							
+						<a sec:authorize="!isAuthenticated()"
 							class="mdl-navigation__link" href="/login">Login</a>
 					</nav>
 				</div>
@@ -31,10 +37,20 @@
 			<div class="mdl-layout__drawer" sec:authorize="isAuthenticated()" th:fragment="drawer">
 				<span class="mdl-layout-title">RMS</span>
 				<nav class="mdl-navigation">
-					<a sec:authorize="hasAuthority('USER')" class="mdl-navigation__link" href="/list">Test</a>
-					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/cars">Cars</a>
-					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/products">Products</a>
-					<a class="mdl-navigation__link" href="/logout">Sign Out</a>
+					<!-- User Role Only-->
+					<a sec:authorize="hasAuthority('USER')" class="mdl-navigation__link" href="/cart">Cart</a>
+					
+					<!-- Super Admin Role Only -->
+					<a sec:authorize="hasAuthority('SUPER_ADMIN')" class="mdl-navigation__link" href="admin/list">Admin</a>
+					
+					<!-- Admin and Super Admin Role -->
+					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/users">User</a>
+					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/cars">Car</a>
+					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/products/list">Product</a>
+					
+					<!-- All Role  -->
+					<a class="mdl-navigation__link" href="/setting">Setting</a>
+					<a class="mdl-navigation__link" href="/logout">Log Out</a>
 				</nav>
 			</div>
 <!-- 		</div>

@@ -5,6 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +28,22 @@ public class ProductControlller {
 	@Autowired
 	CarServiceImpl carService;
 	
-	@GetMapping("**/products")
-	public ModelAndView productsPage(){
+	public String getRole(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = null;
+		if (auth.getPrincipal() instanceof UserDetails) {
+			role = auth.getAuthorities().toString().toLowerCase();
+			role = role.substring(1, role.length()-1);
+		}
+		return role;
+	}
+	
+	@GetMapping("/products/list")
+	public ModelAndView productsListPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Product> products = productService.getAllProducts();
 		modelAndView.addObject("products", products);
-		modelAndView.setViewName("product/products");
+		modelAndView.setViewName("product/list");
 		return modelAndView;
 	}
 	
@@ -61,7 +74,7 @@ public class ProductControlller {
 			//modelAndView.addObject("successMessage", "Car has been added successfully");
 			List<Product> products = productService.getAllProducts();
 			modelAndView.addObject("products", products);
-			modelAndView.setViewName("redirect:/products");
+			modelAndView.setViewName("redirect:/products/list");
 //			}
 			return modelAndView;
 		}
@@ -74,7 +87,7 @@ public class ProductControlller {
 		//modelAndView.addObject("successMessage", "Car has been added successfully");
 		List<Product> products = productService.getAllProducts();
 		modelAndView.addObject("products", products);
-		modelAndView.setViewName("redirect:/products");
+		modelAndView.setViewName("redirect:/products/list");
 		return modelAndView;
 	}
 	
@@ -104,7 +117,7 @@ public class ProductControlller {
 		//modelAndView.addObject("successMessage", "product has been added successfully");
 		List<Product> products = productService.getAllProducts();
 		modelAndView.addObject("products", products);
-		modelAndView.setViewName("redirect:/products");
+		modelAndView.setViewName("redirect:/products/list");
 		}
 		return modelAndView;
 	}

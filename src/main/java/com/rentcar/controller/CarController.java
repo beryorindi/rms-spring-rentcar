@@ -5,6 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -23,6 +26,15 @@ public class CarController {
 	@Autowired
 	private CarService carService;
 	
+	public String getRole(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = null;
+		if (auth.getPrincipal() instanceof UserDetails) {
+			role = auth.getAuthorities().toString().toLowerCase();
+			role = role.substring(1, role.length()-1);
+		}
+		return role;
+	}
 	/*@GetMapping("cars/{id}")
 	public ResponseEntity<Car> getArticleById(@PathVariable("id") Long id) {
 		Car car = carService.getCarById(id);
@@ -38,8 +50,8 @@ public class CarController {
 		modelAndView.setViewName("car/cars");
 		return modelAndView;
 	}
-	@GetMapping("cars/add")
-	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	@GetMapping("**/cars/add")
+//	@GetMapping({"/admin/cars/add","/super_admin/cars/add"})
 	public ModelAndView addCarPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		Car car = new Car();
@@ -48,7 +60,7 @@ public class CarController {
 		return modelAndView;
 	}
 	@PostMapping("cars/add")
-/*	@PostMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+//	@PostMapping({"/admin/cars/add","/super_admin/cars/add"})
 	public ModelAndView addCar(@Valid Car car, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		if (bindingResult.hasErrors()) {
@@ -65,7 +77,7 @@ public class CarController {
 	}
 	
 	@GetMapping("cars/edit/{id}")
-	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+//	@GetMapping({"/admin/cars/edit/{id}","/super_admin/cars/edit/{id}"})
 	public ModelAndView updateCarPage(@PathVariable("id") Long id){
 		ModelAndView modelAndView = new ModelAndView();
 		Car car = carService.getCarById(id);
@@ -75,7 +87,7 @@ public class CarController {
 	}
 	
 	@PostMapping("cars/edit")
-	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+//	@GetMapping({"/admin/cars/edit","/super_admin/cars/edit"})
 	public ModelAndView updateCar(@Valid Car car, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		if (bindingResult.hasErrors()) {
@@ -91,7 +103,7 @@ public class CarController {
 	}
 	
 	@GetMapping("cars/delete/{id}")
-	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+//	@GetMapping({"/admin/cars/delete/{id}","/super_admin/cars/delete/{id}"})
 	public ModelAndView deleteCar(@PathVariable("id") Long id){
 		ModelAndView modelAndView = new ModelAndView();
 		carService.deleteCar(id);

@@ -47,11 +47,11 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		    protected String determineTargetUrl(Authentication authentication) {
 		    	Set<String> authorities = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 		    	if (authorities.contains("SUPER_ADMIN")) {
-		        	return "/super_admin/home";
+		        	return "/super_admin";
 		        }else  if (authorities.contains("ADMIN")) {
-		        	return "/admin/home";
+		        	return "/admin";
 		        } else if (authorities.contains("USER")) {
-		        	return "/user/home";
+		        	return "/user";
 		        } else {
 		            throw new IllegalStateException();
 		        }
