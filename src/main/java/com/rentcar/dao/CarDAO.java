@@ -6,6 +6,7 @@ import com.rentcar.entity.Car;
 
 public interface CarDAO {
 	List<Car> getAllCars();
+	List<Car> getUnlikedCars();
 	Car getCarById(Long id);
 	void addCar(Car car);
 	void updateCar(Car car);

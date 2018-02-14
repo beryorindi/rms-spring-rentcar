@@ -11,7 +11,7 @@
 <!-- <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<div> -->
 			<header class="mdl-layout__header" th:fragment="header">
-				<div class="mdl-layout__header-row">
+				<div class="mdl-layout__header-row" th:fragment="header_row">
 					<!-- Title -->
 					<a href="/" class="mdl-layout-title mdl-navigation__link">RMS</a> <span
 						sec:authorize="isAuthenticated()"> Welcome <span
@@ -23,7 +23,7 @@
 					<!-- Navigation -->
 					<nav class="mdl-navigation">
 							<!-- user role -->
-							<a sec:authorize="hasAuthority('USER')" class="mdl-navigation__link" href="/cart">Cart</a>
+							<a sec:authorize="!hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/cart">Cart</a>
 							
 							<!-- All Role  -->
 							<a sec:authorize="isAuthenticated()"  class="mdl-navigation__link" href="/logout">Log Out</a> 							
@@ -34,6 +34,7 @@
 					</nav>
 				</div>
 			</header>
+			
 			<div class="mdl-layout__drawer" sec:authorize="isAuthenticated()" th:fragment="drawer">
 				<span class="mdl-layout-title">RMS</span>
 				<nav class="mdl-navigation">
@@ -41,7 +42,7 @@
 					<a sec:authorize="hasAuthority('USER')" class="mdl-navigation__link" href="/cart">Cart</a>
 					
 					<!-- Super Admin Role Only -->
-					<a sec:authorize="hasAuthority('SUPER_ADMIN')" class="mdl-navigation__link" href="admin/list">Admin</a>
+					<a sec:authorize="hasAuthority('SUPER_ADMIN')" class="mdl-navigation__link" href="admins">Admin</a>
 					
 					<!-- Admin and Super Admin Role -->
 					<a sec:authorize="hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/users">User</a>

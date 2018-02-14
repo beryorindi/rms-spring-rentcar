@@ -8,5 +8,6 @@ import com.rentcar.entity.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long>{
 	
+//	<List>User findbyRole(String role);
 	User findByEmail(String email);
 }

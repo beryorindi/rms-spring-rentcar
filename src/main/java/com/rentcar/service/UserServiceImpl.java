@@ -1,47 +1,58 @@
 package com.rentcar.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.rentcar.entity.Role;
+import com.rentcar.dao.UserDAOImpl;
 import com.rentcar.entity.User;
-import com.rentcar.repository.RoleRepository;
-import com.rentcar.repository.UserRepository;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService{
-
-	@Autowired
-	private UserRepository userRepo;
-	@Autowired
-    private RoleRepository roleRepo;
-	@Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@Override
-	public User findUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return userRepo.findByEmail(email);
-	}
-
-	@Override
-	public void saveUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setActive(1);
-		Role userRole = roleRepo.findByRole("USER");
-		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepo.save(user);
-	}
-
+	@Autowired
+	UserDAOImpl userDAO;
+	
 	/*@Override
-	public List<User> findAll() {
+	public List<User> findUserByName(String name) {
 		// TODO Auto-generated method stub
-		return userRepo.findAll();
+		return null;
 	}*/
+
+	@Override
+	public List<User> getUserList() {
+		return userDAO.getUserList();
+	}
+
+	@Override
+	public List<User> getAdminList() {
+		return userDAO.getAdminList();
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return userDAO.getUserById(id);
+	}
+
+	@Override
+	public void addUser(User user) {
+		userDAO.addUser(user);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		userDAO.updateUser(user);
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		userDAO.deleteUser(id);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		return userDAO.getUserByEmail(email);
+	}
 
 }

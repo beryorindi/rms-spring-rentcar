@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,12 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rentcar.entity.Product;
 import com.rentcar.entity.User;
 import com.rentcar.service.ProductServiceImpl;
-import com.rentcar.service.UserService;
+import com.rentcar.service.LoginService;
 
 @Controller
 public class LoginController {
 	@Autowired
-	private UserService userService;
+	private LoginService userService;
 	
 	@Autowired
 	ProductServiceImpl productService;
@@ -97,7 +98,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+//		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Super Admin Role");
 		modelAndView.setViewName("admin/super_admin");
 		return modelAndView;
@@ -108,7 +109,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+//		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/admin");
 		return modelAndView;
@@ -133,6 +134,17 @@ public class LoginController {
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with User Role");*/
 		modelAndView.setViewName("error/403");
+		return modelAndView;
+	}
+	
+	@GetMapping("/setting")
+	public ModelAndView settingPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName().toString();
+		User user = userService.findUserByEmail(email);
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("admin/setting/setting");
 		return modelAndView;
 	}
 }

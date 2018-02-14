@@ -1,15 +1,14 @@
-package com.rentcar.service;
+package com.rentcar.dao;
 
 import java.util.List;
 
 import com.rentcar.entity.User;
 
-public interface UserService {
-	//List<User> findUserByName(String name);
+public interface UserDAO {
 	List<User> getUserList();
 	List<User> getAdminList();
-	User getUserById(int id);
 	User getUserByEmail(String email);
+	User getUserById(int id);
 	void addUser(User user);
 	void updateUser(User user);
 	void deleteUser(int id);

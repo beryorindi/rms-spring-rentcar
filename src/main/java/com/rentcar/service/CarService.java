@@ -6,6 +6,7 @@ import com.rentcar.entity.Car;
 
 public interface CarService {
 	List<Car> getAllCars();
+	List<Car> getUnlinkedCars();
 	Car getCarById(Long id);
 	boolean addCar(Car car);
 	void updateCar(Car car);

@@ -2,6 +2,7 @@ package com.rentcar.entity;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +31,9 @@ public class Product {
 	@OneToOne(fetch =FetchType.LAZY)
 	@JoinColumn(name="car_id", nullable= false)
 	private Car car;
+	
+/*	@OneToOne(cascade= CascadeType.ALL, mappedBy = "product", fetch =FetchType.LAZY)
+	private OrderDetail orderDetail;*/
 
 	public Product() {
 	}

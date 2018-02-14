@@ -74,4 +74,11 @@ public class CarDAOImpl implements CarDAO{
 		return count > 0 ? true : false;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Car> getUnlikedCars() {
+		String hql = "FROM Product as p RIGHT JOIN Car as car ON p.car.id = car.id WHERE p.car.id IS NULL";
+		return em.createQuery(hql).getResultList();
+	}
+
 }

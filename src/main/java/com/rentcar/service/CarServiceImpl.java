@@ -47,4 +47,9 @@ public class CarServiceImpl implements CarService{
 		carDAO.deleteCar(id);
 	}
 
+	@Override
+	public List<Car> getUnlinkedCars() {
+		return carDAO.getUnlikedCars();
+	}
+
 }
