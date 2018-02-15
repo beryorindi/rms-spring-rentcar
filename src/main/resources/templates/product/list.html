@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<div th:replace="fragments/header :: header-css"></div>
+	<div th:replace="fragments/header :: header-css"/>
 	<title>Products</title>
 
 </head>
@@ -44,8 +44,8 @@
 						</td>
 					</tr>
 					<tr>
-						<a th:href="${'/products/add'}"	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
-							<button>
+						<a th:href="${'/products/add'}"	>
+							<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 								<i class="material-icons">add</i>
 							</button>
 						</a>

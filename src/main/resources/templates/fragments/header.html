@@ -23,7 +23,8 @@
 					<!-- Navigation -->
 					<nav class="mdl-navigation">
 							<!-- user role -->
-							<a sec:authorize="!hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-navigation__link" href="/cart">Cart</a>
+							<a sec:authorize="!hasAnyAuthority('ADMIN','SUPER_ADMIN')" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/cart">
+							<i class="material-icons">shopping_cart</i></a>
 							
 							<!-- All Role  -->
 							<a sec:authorize="isAuthenticated()"  class="mdl-navigation__link" href="/logout">Log Out</a> 							

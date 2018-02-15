@@ -121,4 +121,11 @@ public class ProductControlller {
 		}
 		return modelAndView;
 	}
+	
+	@GetMapping("cart")
+	public ModelAndView cartPage(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("cart/cart");
+		return modelAndView;
+	}
 }
