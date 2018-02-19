@@ -4,6 +4,13 @@
 <head>
       <title>Cars</title>
       <div th:replace="fragments/header :: header-css"></div>
+      <style>
+      	 .mdl-data-table {
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			} 
+      </style>
 </head>
 <body>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -11,7 +18,11 @@
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
 			<div class="page-content">
-			<h3>Cars List</h3>			   
+			<h3>Cars List</h3>
+			
+			
+			
+					   
 			<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
               <thead>
                 <tr>

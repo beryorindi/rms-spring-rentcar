@@ -12,9 +12,63 @@
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
 			<div class="page-content">
-			<h3 th:if="${link} == 'user'">User List</h3>			   
-			<h3 th:if="${link} == 'admin'">Admin List</h3>
-			<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+			<center><h3 th:if="${link} == 'user'">User List</h3>			   
+			<h3 th:if="${link} == 'admin'">Admin List</h3></center>
+			
+			 <ul class="demo-list-two mdl-list" th:each="user : ${users}">
+			  <li class="mdl-list__item mdl-list__item--two-line">
+			    <span class="mdl-list__item-primary-content">
+			      <i class="material-icons mdl-list__item-avatar">person</i>
+			      <span th:text="${user[0].userdetail.name +' '+user[0].userdetail.lastName}"></span>
+			      <span class="mdl-list__item-sub-title" th:text="${user[0].email}"></span>
+			      <span class="mdl-list__item-sub-title" th:if="${user[0].active == 1}">Active</span>
+			      <span class="mdl-list__item-sub-title" th:if="${user[0].active == 0}">Not Active</span>
+			    </span>
+			    <span class="mdl-list__item-secondary-content">
+			      <span class="mdl-list__item-secondary-info">
+					<span th:if="${link} == 'user'">
+						<span th:if="${user[0].active == 1}">
+							<!-- <span th:text="Active"></span>  -->
+							<span><a th:href="${'/users/active/'+ user[0].id}">
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+									Detactive</button>
+								</a>
+							</span>
+						</span>
+						<span th:if="${user[0].active == 0}">
+							<!-- <span th:text="Not Active"></span> -->
+							<span><a th:href="${'/users/active/'+ user[0].id}">
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+									Activate</button>
+								</a>
+							</span>
+						</span>		
+					</span>	
+					<span th:if="${link} == 'admin'">
+						<span th:if="${user[0].active == 1}">
+							<!-- <span th:text="Active"></span> --> 
+							<span><a th:href="${'/admins/active/'+ user[0].id}">
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+									Detactive</button>
+								</a>
+							</span>
+						</span>
+						<span th:if="${user[0].active == 0}">
+							<!-- <span th:text="Not Active"></span> -->
+							<span><a th:href="${'/admins/active/'+ user[0].id}">
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+									Activate</button>
+								</a>
+							</span>
+						</span>		
+					</span>
+					</span>
+			    </span>
+			  </li>
+			</ul>
+			
+			
+			<!-- <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
               <thead>
 			<tr>
 				<th>Name</th>
@@ -65,7 +119,7 @@
 				</div>			
 			</tr>
 		</tbody>            
-            </table>
+            </table> -->
 		</div>
 		</main>
 		<div th:replace="fragments/footer :: footer"></div>
