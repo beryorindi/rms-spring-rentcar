@@ -17,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rentcar.entity.Product;
 import com.rentcar.entity.User;
-import com.rentcar.entity.Vehicle;
 import com.rentcar.service.ProductServiceImpl;
-import com.rentcar.service.VehicleServiceImpl;
 import com.rentcar.service.LoginService;
 
 @Controller
@@ -28,7 +26,7 @@ public class LoginController {
 	private LoginService userService;
 	
 	@Autowired
-	VehicleServiceImpl vehicleService;
+	ProductServiceImpl productService;
 	
 	public String getRole(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -43,9 +41,9 @@ public class LoginController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView homePage(){
 		ModelAndView modelAndView = new ModelAndView();
-		List<Vehicle> vehicles = vehicleService.getAllVehicles();
-		modelAndView.addObject("vehicles", vehicles);
-		modelAndView.setViewName("vehicle/vehicles");
+		List<Product> products = productService.getAllProducts();
+		modelAndView.addObject("products", products);
+		modelAndView.setViewName("product/products");
 		return modelAndView;
 	}
 	

@@ -32,13 +32,13 @@
 						<td th:text="${p.stock}">Stock</td>
 						<td th:text="${p.price}">Price</td>
 						<td th:text="${p.available}">Available</td>
-						<td><a th:href="${'/products/edit/' + p.id}">
+						<td><a th:href="${'/product/edit/' + p.id}">
 								<button
 									class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">edit</i>
 								</button>
 							</a> 
-							<a th:href="${'/products/delete/' + p.id}">
+							<a th:href="${'/product/delete/' + p.id}">
 								<button	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">delete</i>
 								</button>

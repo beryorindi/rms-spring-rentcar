@@ -96,4 +96,9 @@ public class VehicleServiceImpl implements VehicleService {
 		vehicleDAO.updateVehicle(vehicle);
 	}
 
+	@Override
+	public List<Vehicle> getVehiclesById(Long id) {
+		return vehicleDAO.getVehiclesById(id);
+	}
+
 }

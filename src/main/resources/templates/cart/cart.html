@@ -14,11 +14,14 @@
 		<main class="mdl-layout__content">
 		<div class="page-content">
 			<h3>Cart List</h3>
-			<span th:if="${cart.cartItems == null}">Cart is empty</span>	   
-			<div th:if="${cart.cartItems != null}" th:each="cartitem: ${cart.cartItems}">
-				<span th:text="${cartitem.product}"></span>
-				<span th:text="${cartitem.itemNum}"></span>
-				<span th:text="${cartitem.itemPrice}"></span>
+			<span th:if="${#lists.size(cart.cartItems) == 0}">Cart is empty</span>	   
+			<div th:if="${#lists.size(cart.cartItems) != 0}" th:each="item: ${cart.cartItems}">
+				<span th:text="${item.product.name}"></span>
+				<span th:text="${item.itemNum}"></span>
+				<span th:text="${item.itemPrice}"></span>
+				<div th:each = "v : ${item.vehicles}">
+					<span th:text="'-'+${v.brand}+' '+${v.model}+' '+${v.type}"></span>
+				</div>
 			</div>
 		</div>
 		</main>

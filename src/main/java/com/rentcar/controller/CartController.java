@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rentcar.entity.Product;
 import com.rentcar.model.Cart;
 import com.rentcar.model.CartItem;
+import com.rentcar.service.CartServiceImpl;
 import com.rentcar.service.ProductService;
 import com.rentcar.service.ProductServiceImpl;
+import com.rentcar.service.VehicleServiceImpl;
 
 @Controller
 @Scope("request")
@@ -27,7 +29,7 @@ public class CartController {
 	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	
 	@Autowired
-	private ProductServiceImpl productService;
+	private CartServiceImpl cartService;
 	
 	@Autowired
 	private Cart cart;
@@ -36,6 +38,7 @@ public class CartController {
 	public ModelAndView cartPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("cart", this.cart);
+		
 		modelAndView.setViewName("cart/cart");
 		return modelAndView;
 	}
@@ -43,13 +46,7 @@ public class CartController {
 	@GetMapping("/cart/add/{id}")
 	public ModelAndView addToCart(@PathVariable("id") Long id){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Product product = productService.getProductById(id);
-		
-		CartItem cartItem = new CartItem();
-		cartItem.setId(UUID.randomUUID());
-		cartItem.setProduct(product);
-		cartItem.setItemNum(1);
-		cartItem.setItemPrice(product.getPrice(), cartItem.getItemNum());
+		CartItem cartItem = cartService.addCartItem(id);
 		
 		cart.setOrderNum(sdf.format(timestamp));
 		cart.setCustomerInfo(auth.getName());

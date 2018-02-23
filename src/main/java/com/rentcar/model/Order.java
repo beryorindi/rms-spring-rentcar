@@ -1,42 +1,17 @@
-package com.rentcar.entity;
+package com.rentcar.model;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-/*
-@Entity
-@Table(name="order")*/
 public class Order {
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Long id;
-	
-	@Column(name="order_by")
 	private String orderBy;
-	
-	@Column(name="status")
 	private String status;
-	
-	@Column(name="order_date")
 	private Date orderDate;	
-	
-	@Column(name="update_on")
 	private Date updateOn;
-	
-	@Column(name="update_by")
 	private Date updateBy;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order_detail")
 	private Set<OrderDetail> orderDetails = new HashSet<>();
 	
 	public Order() {
@@ -108,6 +83,4 @@ public class Order {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
-	*/
 }

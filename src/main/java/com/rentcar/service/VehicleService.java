@@ -8,6 +8,7 @@ import com.rentcar.entity.Vehicle;
 
 public interface VehicleService {
 	List<Vehicle> getAllVehicles();
+	List<Vehicle> getVehiclesById(Long id);
 	List<Vehicle> getUnlinkedVehicles();
 	Vehicle getVehicleById(Long id);
 	void addVehicle(Vehicle vehicle);

@@ -1,8 +1,10 @@
 package com.rentcar.model;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.rentcar.entity.Product;
+import com.rentcar.entity.Vehicle;
 
 
 public class CartItem {
@@ -10,6 +12,8 @@ public class CartItem {
 	private UUID id;
 	
 	private Product product;
+	
+	private List<Vehicle> vehicles;
 	
 	private int itemNum;
 	
@@ -52,6 +56,14 @@ public class CartItem {
 	
 	public void setItemPrice(int price, int num ) {
 		this.itemPrice = price * num;
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 	
 	

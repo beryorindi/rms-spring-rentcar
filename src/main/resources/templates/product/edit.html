@@ -19,24 +19,16 @@
 		<main class="mdl-layout__content">
 			<div class="mdl-card mdl-shadow--6dp">
 				<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-					<h2 class="mdl-card__title-text">Add Product</h2>
+					<h2 class="mdl-card__title-text">Edit Product</h2>
 				</div>
-				<form action="/products/edit" th:object="${product}" method="post">
+				<form action="/product/edit" th:object="${product}" method="post">
 					<div class="mdl-card__supporting-text">
 						<input type="text" th:field="*{id}" hidden="true"/>
 						<div
 							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-							<select class="mdl-textfield__input" th:field="*{car.id}">
-								<option value="0">Select Car</option>
-								<option th:each="c : ${cars}" th:value="${c.id}"
-									th:text="${c.brand}+' '+${c.model}+' '+${c.type}+' '+${c.year}+' '+${c.transmition}">car</option>
-							</select> <label class="mdl-textfield__label" for="car">Car</label>
-						</div>
-						<div
-							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 							<input class="mdl-textfield__input" type="text"
-								th:field="*{stock}" /> <label class="mdl-textfield__label">stock</label>
-							<label th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"
+								th:field="*{name}" /> <label class="mdl-textfield__label">Name</label>
+							<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
 								class="validation-message"></label>
 						</div>
 						<div
@@ -44,6 +36,20 @@
 							<input class="mdl-textfield__input" type="text"
 								th:field="*{price}" /> <label class="mdl-textfield__label">Price</label>
 							<label th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+								class="validation-message"></label>
+						</div>
+						<div
+							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="text"
+								th:field="*{stock}" disabled="disabled" /> <label class="mdl-textfield__label">Stock</label>
+							<label th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"
+								class="validation-message"></label>
+						</div>
+						<div
+							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="text"
+								th:field="*{available}" disabled="disabled" /> <label class="mdl-textfield__label">Available</label>
+							<label th:if="${#fields.hasErrors('available')}" th:errors="*{available}"
 								class="validation-message"></label>
 						</div>
 					</div>
@@ -56,63 +62,6 @@
 				</form>
 			</div>
 		</main>
-		
-		
-		<!-- <main class="mdl-layout__content">
-		<div class="page-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<form action="/products/edit" th:object="${product}" method="Post"
-							class="form-horizontal" role="form">
-							<h2>Edit product</h2>
-							<div class="form-group">
-								<div class="col-sm-9">
-									<input type="text" th:field="*{id}" placeholder="id"
-										class="form-control" />
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-9">
-									<select th:field="*{car.id}" class="form-control">
-										<option value="0">Select Car</option>
-										<option th:each="c : ${cars}" th:value="${c.id}"
-											th:text="${c.brand}+' '+${c.model}+' '+${c.type}+' '+${c.year}+' '+${c.transmition}">car</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-9">
-									<label th:if="${#fields.hasErrors('stock')}"
-										th:errors="*{stock}" class="validation-message"></label> <input
-										type="text" th:field="*{stock}" placeholder="stock"
-										class="form-control" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-sm-9">
-									<label th:if="${#fields.hasErrors('price')}"
-										th:errors="*{price}" class="validation-message"></label> <input
-										type="text" th:field="*{price}" placeholder="price"
-										class="form-control" />
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-9">
-									<button type="submit" class="btn btn-primary btn-block">Save</button>
-								</div>
-							</div>
-
-							<span th:utext="${successMessage}"></span>
-
-						</form>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		</main> -->
 		<div th:replace="fragments/footer :: footer"></div>
 	</div>
 

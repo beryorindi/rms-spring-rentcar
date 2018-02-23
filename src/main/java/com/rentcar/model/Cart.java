@@ -16,6 +16,8 @@ public class Cart {
 	
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 
+	private int totalPrice;
+	
 	public Cart() {
 	}
 
@@ -60,9 +62,12 @@ public class Cart {
 		this.cartItems = cartItems;
 	}
 
-/*	public void removeCartItemById(String id){
-		
-		this.cartItems.remove(arg0)
-	}*/
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	
 }
