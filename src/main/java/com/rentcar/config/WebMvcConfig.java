@@ -23,4 +23,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 	    resolver.setOrder(1);
 	    return resolver;
 	}
+	
+	
 }

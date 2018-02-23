@@ -4,7 +4,7 @@
 
 <head >
 	<div th:replace="fragments/header :: header-css" />
-	<title>Products</title>
+	<title>RMS</title>
 	<style>
  .demo-card-square.mdl-card {
 			    width: 300px;
@@ -43,24 +43,22 @@
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
 		<div class="page-content">
-			<center><h4>Products List</h4></center>
+			<center><h4>Product List</h4></center>
 
-			<div th:each="product: ${products}">
+			<div th:each="vehicle: ${vehicles}">
 				<div class="demo-card-square mdl-card mdl-shadow--2dp" >
 				  <div class="mdl-card__title mdl-card--expand">
-				    <h2 class="mdl-card__title-text" th:text="${product.car.brand}+' '+${product.car.model}"></h2>
+				    <h2 class="mdl-card__title-text" th:text="${vehicle.brand}+' '+${vehicle.model}+' '+${vehicle.type}"></h2>
 				  </div>
 				  <div class="mdl-card__supporting-text">
 				  	<table>
 				  		<tr>
-				  			<td>ID</td>
 				  			<td>Stock</td>
 				  			<td>Price</td>
 				  		</tr>
 				  		<tr>
-				  			<td th:text="${product.id}">Id</td>
-							<td th:text="${product.stock}">Stock</td>
-							<td th:text="${product.price}">Price</td>
+							<td th:text="${vehicle.product.stock}">Stock</td>
+							<td th:text="${vehicle.product.price}">Price</td>
 				  		</tr>
 				  	</table>
 				  	
@@ -70,7 +68,7 @@
 				      <i class="material-icons icon-blue" id="viewdetail">visibility</i>
 				    </a>
 				    	
-				    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab" th:href="${'/cart/add/' + product.id}">
+				    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab" th:href="${'/cart/add/' + vehicle.id}">
 				      <i class="material-icons">add_shopping_cart</i>
 				    </a>
 				  </div>

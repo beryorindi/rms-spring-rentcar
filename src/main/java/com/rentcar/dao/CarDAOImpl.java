@@ -38,24 +38,6 @@ public class CarDAOImpl implements CarDAO{
 
 	@Override
 	public void updateCar(Car car) {
-/*		String hql = "UPDATE car SET brand=?, model=?, type=?, transmition=?, year=?, seat=? WHERE id=?";
-		em.createQuery(hql)
-						.setParameter(1, car.getBrand())
-						.setParameter(2, car.getModel())
-						.setParameter(3, car.getType())
-						.setParameter(4, car.getTransmition())
-						.setParameter(5, car.getYear())
-						.setParameter(6, car.getSeat())
-						.setParameter(7, car.getId());
-		em.
-		Car obj = getCarById(car.getId());
-		obj.setBrand(car.getBrand());
-		obj.setModel(car.getModel());
-		obj.setSeat(car.getSeat());
-		obj.setTransmition(car.getTransmition());
-		obj.setType(car.getType());
-		obj.setYear(car.getYear());*/
-//		em.flush();
 		em.merge(car);
 	}
 
@@ -78,7 +60,7 @@ public class CarDAOImpl implements CarDAO{
 	@Override
 	public List<Car> getUnlikedCars() {
 		String hql = "FROM Product as p RIGHT JOIN Car as car ON p.car.id = car.id WHERE p.car.id IS NULL";
-		return em.createQuery(hql).getResultList();
+		return (List<Car>)em.createQuery(hql).getResultList();
 	}
 
 }

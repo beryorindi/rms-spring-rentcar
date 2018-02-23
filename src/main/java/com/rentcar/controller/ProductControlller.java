@@ -17,13 +17,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rentcar.entity.Car;
 import com.rentcar.entity.Product;
+import com.rentcar.entity.Vehicle;
 import com.rentcar.service.CarServiceImpl;
 import com.rentcar.service.ProductServiceImpl;
+import com.rentcar.service.VehicleServiceImpl;
 
 @Controller
 public class ProductControlller {
 	@Autowired
 	ProductServiceImpl productService;
+	
+	@Autowired
+	VehicleServiceImpl vehicleService;
 	
 	@Autowired
 	CarServiceImpl carService;
@@ -38,7 +43,7 @@ public class ProductControlller {
 		return role;
 	}
 	
-	@GetMapping("/products/list")
+	@GetMapping("/product/list")
 	public ModelAndView productsListPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Product> products = productService.getAllProducts();
@@ -46,6 +51,8 @@ public class ProductControlller {
 		modelAndView.setViewName("product/list");
 		return modelAndView;
 	}
+	
+
 	
 	@GetMapping("products/add")
 	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
@@ -60,12 +67,29 @@ public class ProductControlller {
 	}
 	
 	@PostMapping("products/add")
-	/*	@PostMapping({"/admin/cars/add","/super_admin/cars/add"})*/
+	//@PostMapping({"/admin/cars/add","/super_admin/cars/add"})
+	public ModelAndView addProduct(@Valid Product product, BindingResult bindingResult){
+		ModelAndView modelAndView = new ModelAndView();
+/*		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("product/add");
+		} else {*/
+		
+		productService.addProduct(product);
+		
+		List<Product> products = productService.getAllProducts();
+		modelAndView.addObject("products", products);
+		modelAndView.setViewName("redirect:/products/list");
+//		}
+		return modelAndView;
+	}
+	
+	/*@PostMapping("products/add")
+		@PostMapping({"/admin/cars/add","/super_admin/cars/add"})
 		public ModelAndView addProduct(@Valid Product product, BindingResult bindingResult){
 			ModelAndView modelAndView = new ModelAndView();
-			/*if (bindingResult.hasErrors()) {
+			if (bindingResult.hasErrors()) {
 				modelAndView.setViewName("product/add");
-			} else {*/
+			} else {
 			Car car = carService.getCarById(product.getCar().getId());
 			product.setCar(car);
 			
@@ -77,7 +101,7 @@ public class ProductControlller {
 			modelAndView.setViewName("redirect:/products/list");
 //			}
 			return modelAndView;
-		}
+		}*/
 	
 	@GetMapping("products/delete/{id}")
 	/*@GetMapping({"/admin/cars/add","/super_admin/cars/add"})*/
@@ -103,8 +127,8 @@ public class ProductControlller {
 		return modelAndView;
 	}
 	
-	@PostMapping("products/edit")
-	/*@GetMapping({"/admin/products/add","/super_admin/products/add"})*/
+	/*@PostMapping("products/edit")
+	@GetMapping({"/admin/products/add","/super_admin/products/add"})
 	public ModelAndView updateProduct(@Valid Product product, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		if (bindingResult.hasErrors()) {
@@ -120,12 +144,7 @@ public class ProductControlller {
 		modelAndView.setViewName("redirect:/products/list");
 		}
 		return modelAndView;
-	}
+	}*/
 	
-	@GetMapping("cart")
-	public ModelAndView cartPage(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("cart/cart");
-		return modelAndView;
-	}
+	
 }

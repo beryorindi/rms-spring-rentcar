@@ -3,22 +3,27 @@ package com.rentcar.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("session")
 public class Cart {
 	
-	/*private int orderNum;
+	private String orderNum;
 	
 	private String customerInfo;
 	
-	private final List<CartDetails> cartDetails = new ArrayList<CartDetails>();
+	private List<CartItem> cartItems = new ArrayList<CartItem>();
 
 	public Cart() {
 	}
 
-	public int getOrderNum() {
+	public String getOrderNum() {
 		return orderNum;
 	}
 
-	public void setOrderNum(int orderNum) {
+	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
 
@@ -29,32 +34,35 @@ public class Cart {
 	public void setCustomerInfo(String customerInfo) {
 		this.customerInfo = customerInfo;
 	}
-
-	public List<CartDetails> getCartDetails() {
-		return cartDetails;
-	}
 	
-	private CartDetails findDetailByCode(String code){
-		for (CartDetails detail : this.cartDetails){
-			if(detail.get){
-				
-			}
+	
+	
+	/*public boolean isEmpty(){
+		boolean result;
+		if(!this.cartItems.isEmpty()){
+			result = false;
 		}
-			
-		return null;
+		else{
+			result = true;
+		}
+		return result;
+	}*/
+	
+	public void addCartItem(CartItem cartItem){
+		this.cartItems.add(cartItem);
 	}
-	
-	
-	public void addProduct(ProductInfo){
+
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
+
+/*	public void removeCartItemById(String id){
 		
-	}
-	
-	
-	*/
-	
-	
-	
-	
-	
+		this.cartItems.remove(arg0)
+	}*/
 	
 }

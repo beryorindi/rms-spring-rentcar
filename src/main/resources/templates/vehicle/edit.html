@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/header :: header-css"></div>
+	<title>Edit Product</title>
+	<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /> -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<div th:replace="fragments/header :: header"></div>
+		<div th:replace="fragments/header :: drawer"></div>
+		<main class="mdl-layout__content">
+			<div class="mdl-card mdl-shadow--6dp">
+				<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+					<h2 class="mdl-card__title-text">Edit Product</h2>
+				</div>
+				<form action="/vehicle/edit" th:object="${vehicle}" method="post">
+    	  			<div class="mdl-card__supporting-text">
+    					<input class="mdl-textfield__input" type="text" th:field="*{id}" hidden="true"/>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> 
+							<input class="mdl-textfield__input" type="text" th:field="*{brand}"/>
+							<label class="mdl-textfield__label">Brand</label>
+							<label th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" class="validation-message"></label>
+    					</div>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{model}"/>
+    						<label class="mdl-textfield__label">Model</label>
+    						<label th:if="${#fields.hasErrors('model')}" th:errors="*{model}" class="validation-message"></label> 
+    					</div>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{type}"/>
+    						<label class="mdl-textfield__label">Type</label>
+    						<label th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="validation-message"></label>
+    					</div>												
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	    					<select class="mdl-textfield__input" name="transmition" id="transmition">
+	    						<option value="AT">Automatic</option>
+	    						<option value="MT">Manual</option>
+	    					</select>
+	    					<label class="mdl-textfield__label" for="transmition">Transmition</label>
+    						</div> 
+					    
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{seat}" />
+    						<label class="mdl-textfield__label">Seat</label>
+    					</div> 
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{year}" />
+    						<label class="mdl-textfield__label">Year</label>
+    					</div>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{licensePlate}" />
+    						<label class="mdl-textfield__label">License Plate Number</label>
+    					</div>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{color}" />
+    						<label class="mdl-textfield__label">Color</label>
+    					</div> 
+    					
+    					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="existProduct">
+						  <input type="radio" id="existProduct" class="mdl-radio__button" name="options" checked="checked" onclick="exist()">
+						  <span class="mdl-radio__label">Exist Product</span>
+						</label>
+						<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="newProduct">
+						  <input type="radio" id="newProduct" class="mdl-radio__button" name="options" onclick="newProd()">
+						  <span class="mdl-radio__label">New Product</span>
+						</label>    					
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="productLabel">
+							<select class="mdl-textfield__input" th:field="*{product.id}" id="product" onchange="loadProduct()">
+								<option value=""></option>
+								<option th:each="p : ${products}" th:value="${p.id}"
+									th:text=" ${p.name}+' '+${p.price}">product</option>
+							</select> <label class="mdl-textfield__label" for="product">Product</label>
+						</div>	
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{product.price}" id="price"/>
+    						<label class="mdl-textfield__label" for="price">Price</label>
+    					</div>
+    					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    						<input class="mdl-textfield__input" type="text" th:field="*{product.name}" id="name"/>
+    						<label class="mdl-textfield__label" for="name">Name</label>
+    					</div> 			
+    				</div>
+	    			<div class="mdl-card__actions mdl-card--border">
+	    				<button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Save</button>
+	    			</div>
+	    			<p id="result"></p>
+	    			
+	    			<span th:utext="${successMessage}"></span>
+    			</form>
+			</div>
+		</main>
+	
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+<script type="text/javascript">
+		/*<![CDATA[*/
+			 var products = /*[[${products}]]*/ 'default';
+			
+			  var result = [];
+			function loadProduct() {
+				
+			    var id = document.getElementById("product").value;
+			    for(var i=0; i < products.length; i++){
+			    	if(products[i]["id"] == id){
+			    		result.push(products[i]);
+			    	}
+			    }
+			    if(result.length > 0){
+				    document.getElementById("price").value = result[0]["price"];
+				    document.getElementById("name").value = result[0]["name"];
+			    }else{
+			    	document.getElementById("price").value = "";
+				    document.getElementById("name").value = "";
+			    }
+			    result = [];
+			}
+		/*]]>*/
+		function exist(){		
+			document.getElementById("productLabel").hidden = false;
+			document.getElementById("price").disabled = true;
+			document.getElementById("name").disabled = true;
+			document.getElementById("product").disabled = false;
+			document.getElementById("existProduct").checked = true;
+			document.getElementById("newProduct").checked = false;
+		}
+		function newProd(){
+			document.getElementById("price").disabled = false;
+			document.getElementById("name").disabled = false;
+			document.getElementById("product").disabled = true;
+			document.getElementById("existProduct").checked = false;
+			document.getElementById("newProduct").checked = true;
+			document.getElementById("productLabel").hidden = true;
+			document.getElementById("product").value = "";
+			document.getElementById("price").value = "";
+		    document.getElementById("name").value = "";
+		}
+	</script>
+	
+</body>
+</html>

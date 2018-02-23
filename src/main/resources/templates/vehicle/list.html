@@ -4,8 +4,13 @@
 
 <head>
 	<div th:replace="fragments/header :: header-css"/>
-	<title>Products</title>
-
+	<title>Vehicles</title>
+	<!-- <script th:inline="javascript">
+		/*<![CDATA[*/
+			var vehicles = /*[[${vehicles}]]*/ 'default';
+			console.log(vehicles);
+		/*]]>*/
+	</script> -->
 </head>
 <body>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -13,45 +18,49 @@
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
 		<div class="page-content">
-			<h3>Product List</h3>			   
+			<h3>Vehicle List</h3>			   
 			<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
               <thead>
                 <tr>
-                  <th class="mdl-data-table__cell--non-numeric">Id</th>
-                  <th>Name</th>
-                  <th>Stock</th>
-                  <th>Price</th>
-                  <th>Available</th>
+                  <th class="mdl-data-table__cell--non-numeric">License Plate Number</th>
+                  <th>Brand</th>
+                  <th>Model</th>
+                  <th>Type</th>
+                  <th>Year</th>
+                  <th>Color</th>
+                  <th>Product Name</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-					<tr th:each="p : ${products}">
-						<td th:text="${p.id}">Id</td>
-						<td th:text="${p.name}">Name</td>
-						<td th:text="${p.stock}">Stock</td>
-						<td th:text="${p.price}">Price</td>
-						<td th:text="${p.available}">Available</td>
-						<td><a th:href="${'/products/edit/' + p.id}">
+					<tr th:each="v : ${vehicles}">
+						<td th:text="${v.licensePlate}">License Plate</td>
+						<td th:text="${v.brand}">Brand</td>
+						<td th:text="${v.model}">Model</td>
+						<td th:text="${v.type}">Type</td>
+						<td th:text="${v.year}">Year</td>
+						<td th:text="${v.color}">Color</td>
+						<td th:text="${v.product.name}">Color</td>
+						<td><a th:href="${'/vehicle/edit/' + v.id}">
 								<button
 									class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">edit</i>
 								</button>
 							</a> 
-							<a th:href="${'/products/delete/' + p.id}">
+							<a th:href="${'/vehicle/delete/' + v.id}">
 								<button	class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 									<i class="material-icons">delete</i>
 								</button>
 							</a>
 						</td>
 					</tr>
-	<!-- 				<tr>
-						<a th:href="${'/products/add'}"	>
+					<tr>
+						<a th:href="${'/vehicle/add'}"	>
 							<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 								<i class="material-icons">add</i>
 							</button>
 						</a>
-					</tr> -->
+					</tr>
 				</tbody>              
             </table>
 		</div>

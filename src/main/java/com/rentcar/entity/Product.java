@@ -2,6 +2,8 @@ package com.rentcar.entity;
 
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,27 +12,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+
+@Scope("session")
 @Entity
-@Table(name="products")
+@Table(name="product")
 public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="product_id")
 	private Long id;
+	
 	@Column(name="stock")
 	private int stock;
+	
+	@Column(name="name")
+	private String name;
+	
 	@Column(name="available")
 	private int available;
+	
 	@Column(name="price")
 	private int price;
 	
-	@OneToOne(fetch =FetchType.LAZY)
-	@JoinColumn(name="car_id", nullable= false)
-	private Car car;
+	@OneToMany(cascade = CascadeType.ALL, 
+			mappedBy = "product")
+	private List<Vehicle> vehicles;
+	
 	
 /*	@OneToOne(cascade= CascadeType.ALL, mappedBy = "product", fetch =FetchType.LAZY)
 	private OrderDetail orderDetail;*/
@@ -38,13 +51,13 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(Long id, int stock, int price, Car car) {
+/*	public Product(Long id, int stock, int price, Car car) {
 		this.id = id;
 		this.stock = stock;
 		this.price = price;
 		this.car = car;
 		this.available = stock;
-	}
+	}*/
 
 	public Long getId() {
 		return id;
@@ -70,13 +83,14 @@ public class Product {
 		this.price = price;
 	}
 
-	public Car getCar() {
+	
+/*	public Car getCar() {
 		return car;
 	}
 
 	public void setCar(Car car) {
 		this.car = car;
-	}
+	}*/
 
 	public int getAvailable() {
 		return available;
@@ -84,6 +98,22 @@ public class Product {
 
 	public void setAvailable(int available) {
 		this.available = available;
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

@@ -13,7 +13,13 @@
 		<div th:replace="fragments/header :: drawer"></div>
 		<main class="mdl-layout__content">
 		<div class="page-content">
-			<h3>Cart List</h3>			   
+			<h3>Cart List</h3>
+			<span th:if="${cart.cartItems == null}">Cart is empty</span>	   
+			<div th:if="${cart.cartItems != null}" th:each="cartitem: ${cart.cartItems}">
+				<span th:text="${cartitem.product}"></span>
+				<span th:text="${cartitem.itemNum}"></span>
+				<span th:text="${cartitem.itemPrice}"></span>
+			</div>
 		</div>
 		</main>
 		<div th:replace="fragments/footer :: footer"></div>

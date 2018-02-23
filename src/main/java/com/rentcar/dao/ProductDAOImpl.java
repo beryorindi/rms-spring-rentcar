@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rentcar.entity.Car;
 import com.rentcar.entity.Product;
+import com.rentcar.entity.Vehicle;
 
 @Transactional
 @Repository
@@ -52,5 +53,15 @@ public class ProductDAOImpl implements ProductDAO{
 						.setParameter(1, car.getId()).getResultList().size();
 		return count > 0 ? true : false;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vehicle> getVehiclesByProductId(Long id) {
+		String hql = "FROM Vehicle as v WHERE v.product.id = ?";
+		return em.createQuery(hql).setParameter(1, id)
+				.getResultList();
+	}
+
+	
 
 }
