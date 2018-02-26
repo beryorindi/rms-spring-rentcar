@@ -38,7 +38,6 @@ public class CartController {
 	public ModelAndView cartPage(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("cart", this.cart);
-		
 		modelAndView.setViewName("cart/cart");
 		return modelAndView;
 	}
@@ -52,6 +51,15 @@ public class CartController {
 		cart.setCustomerInfo(auth.getName());
 		cart.addCartItem(cartItem);
 		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/cart");
+		return modelAndView;
+	}
+	
+	
+	@GetMapping("/cart/delete/{id}")
+	public ModelAndView deleteCartItem(@PathVariable("id") UUID id){
+		cartService.deleteCartItem(id);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/cart");
 		return modelAndView;

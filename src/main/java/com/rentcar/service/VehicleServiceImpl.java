@@ -1,6 +1,8 @@
 package com.rentcar.service;
 
+
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,6 +101,15 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public List<Vehicle> getVehiclesById(Long id) {
 		return vehicleDAO.getVehiclesById(id);
+	}
+
+	@Override
+	public Vehicle getRandomVehicleByProductId(Long id) {
+		List<Vehicle> vehicles = vehicleDAO.getVehiclesById(id);
+		Random rand = new Random();
+		Vehicle vehicle = vehicles.get(rand.nextInt(vehicles.size()));
+		System.out.println(vehicle);
+		return vehicle;
 	}
 
 }

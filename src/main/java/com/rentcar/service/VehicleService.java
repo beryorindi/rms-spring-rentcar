@@ -10,6 +10,7 @@ public interface VehicleService {
 	List<Vehicle> getAllVehicles();
 	List<Vehicle> getVehiclesById(Long id);
 	List<Vehicle> getUnlinkedVehicles();
+	Vehicle getRandomVehicleByProductId(Long id);
 	Vehicle getVehicleById(Long id);
 	void addVehicle(Vehicle vehicle);
 	void addVehicle(Vehicle vehicle,Product product);

@@ -2,6 +2,7 @@ package com.rentcar.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -70,4 +71,7 @@ public class Cart {
 		this.totalPrice = totalPrice;
 	}
 	
+	public void removeCartItem(int id){
+		this.cartItems.remove(id);
+	}
 }

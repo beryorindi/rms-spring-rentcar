@@ -54,7 +54,7 @@ public class CartItem {
 		this.itemPrice = itemPrice;
 	}
 	
-	public void setItemPrice(int price, int num ) {
+	public void setItemPrice(int price, int num) {
 		this.itemPrice = price * num;
 	}
 
@@ -66,6 +66,8 @@ public class CartItem {
 		this.vehicles = vehicles;
 	}
 	
-	
+	public void setVehicles(Vehicle vehicle){
+		this.vehicles.add(vehicle);
+	}
 	
 }

@@ -5,6 +5,26 @@
 <head >
 	<div th:replace="fragments/header :: header-css" />
 	<title>Products</title>
+	
+	<!-- <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet"
+          href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+    <script src="js/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.js"></script>
+    <style>
+        body {
+            padding: 16px;
+        }
+
+        button {
+            margin-right: 8px;
+        }
+    </style>
+     -->
 	<style>
  .demo-card-square.mdl-card {
 			    width: 300px;
@@ -33,7 +53,53 @@
 				i.icon-blue{
 					color:blue;	
 				}
-			
+				
+				body {
+				  padding-top: 20px;
+				  padding-left: 20px;
+				  box-sizing: border-box;
+				}
+				
+				.mdl-dialog {
+				  border: none;
+				  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+				  width: 280px; }
+				  .mdl-dialog__title {
+				    padding: 24px 24px 0;
+				    margin: 0;
+				    font-size: 2.5rem; }
+				  .mdl-dialog__actions {
+				    padding: 8px 8px 8px 24px;
+				    display: -webkit-flex;
+				    display: -ms-flexbox;
+				    display: flex;
+				    -webkit-flex-direction: row-reverse;
+				        -ms-flex-direction: row-reverse;
+				            flex-direction: row-reverse;
+				    -webkit-flex-wrap: wrap;
+				        -ms-flex-wrap: wrap;
+				            flex-wrap: wrap; }
+				    .mdl-dialog__actions > * {
+				      margin-right: 8px;
+				      height: 36px; }
+				      .mdl-dialog__actions > *:first-child {
+				        margin-right: 0; }
+				    .mdl-dialog__actions--full-width {
+				      padding: 0 0 8px 0; }
+				      .mdl-dialog__actions--full-width > * {
+				        height: 48px;
+				        -webkit-flex: 0 0 100%;
+				            -ms-flex: 0 0 100%;
+				                flex: 0 0 100%;
+				        padding-right: 16px;
+				        margin-right: 0;
+				        text-align: right; }
+				  .mdl-dialog__content {
+				    padding: 20px 24px 24px 24px;
+				    color: rgba(0,0,0, 0.54); }
+				    
+				    
+							
 </style>
 
 </head>
@@ -46,7 +112,60 @@
 			<center><h4>Products List</h4></center>
 
 			<div th:each="product: ${products}">
+				<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+							
+							var products = /*[[${products}]]*/ 'default';
+							console.log(products);
+						(function() {
+							'use strict';
+							var dialogButton = document.querySelector('#action-modal-demo');
+							var dialog = document.querySelector('#dialog');
+							if (!dialog.showModal) {
+								dialogPolyfill.registerDialog(dialog);
+							}
+							dialogButton.addEventListener('click', function() {
+								dialog.showModal();
+							});
+							dialog.querySelector('button:not([disabled])').addEventListener(
+									'click', function() {
+										dialog.close();
+									});
+						}());
+						/*]]>*/
+						
+						
+					    /* $('#action-modal-demo').click(function () {
+					        showDialog({
+					            title: 'A demo with action buttons',
+					            text: 'Do Action button will display an alert. Press close or escape key will close the modal!',
+					            negative: {
+					                title: 'Close'
+					            },
+					            positive: {
+					                title: 'Do Action',
+					                onClick: function (e) {
+					                    alert('Action performed!');
+					                }
+					            }
+					        });
+					    }); */
+					
+					</script>
 				<div class="demo-card-square mdl-card mdl-shadow--2dp" >
+					<dialog id="dialog" class="mdl-dialog">
+					  <h3 class="mdl-dialog__title">Rent Car</h3>
+					  <div class="mdl-dialog__content">
+					    <p>
+					      This is an example of the Material Design Lite dialog component.
+					      Please use responsibly.
+					    </p>
+					  </div>
+					  <div class="mdl-dialog__actions">
+					    <button type="button" class="mdl-button">Close</button>
+					    <button type="button" class="mdl-button" th:href="${'/cart/add/' + product.id}">Add to Cart</button>
+					  </div>
+					</dialog>
 				  <div class="mdl-card__title mdl-card--expand">
 				    <h2 class="mdl-card__title-text" th:text="${product.name}"></h2>
 				  </div>
@@ -68,16 +187,20 @@
 				      <i class="material-icons icon-blue" id="viewdetail">visibility</i>
 				    </a>
 				    	
-				    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab" th:href="${'/cart/add/' + product.id}">
+				    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab dialog-button" id="action-modal-demo">
 				      <i class="material-icons">add_shopping_cart</i>
 				    </a>
 				  </div>
+				  
 				</div>
+				
 			</div>
 		</div>
 		</main>
 		<div th:replace="fragments/footer :: footer"></div>
 	</div>
+	
+
 
 </body>
 </html>
